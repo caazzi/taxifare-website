@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
+import datetime
 
 '''
 # How much will your taxi cost?
@@ -12,10 +13,9 @@ I will need some information to estimate how much your ride will cost.
 
 '''
 ## Please inform the following:
-
-1. date and time
 '''
 
+d = st.date_input("1. date and time", datetime.datetime())
 
 '''
 2. pickup location
@@ -31,5 +31,5 @@ I will need some information to estimate how much your ride will cost.
 
 
 '''
-## Thanks! Our predicted fare is:
+## Thanks! Your predicted fare is:
 '''
