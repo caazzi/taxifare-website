@@ -3,3 +3,4 @@ pandas
 requests
 datetime
 folium
+streamlit_folium
