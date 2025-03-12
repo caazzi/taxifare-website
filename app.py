@@ -25,10 +25,7 @@ d = st.date_input("1. date and time", datetime.datetime(2025,3,12))
 3. dropoff location
 '''
 
-'''
-4. passenger count
-'''
-
+numb_passagers = st.slider("4. how many passangers?", 1, 4, 1)
 
 '''
 ## Thanks! Your predicted fare is:
