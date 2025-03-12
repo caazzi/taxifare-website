@@ -19,8 +19,12 @@ I will need some information to estimate how much your ride will cost.
 
 d = st.date_input("1. When?", datetime.datetime(2025,3,12))
 
-# Set page title and description
-st.write("Select two points on the map by clicking")
+import streamlit as st
+import folium
+from streamlit_folium import st_folium
+import pandas as pd
+
+st.write("Click on the map to select the initial and final points:")
 
 # Manhattan coordinates (centered roughly on Midtown)
 manhattan_lat = 40.7831
@@ -40,18 +44,19 @@ def reset_points():
 # Create a folium map centered on Manhattan
 m = folium.Map(location=[manhattan_lat, manhattan_lng], zoom_start=13)
 
+
 # Display the map and get the clicked point
 map_data = st_folium(m, width=700, height=500, key=f"map_{len(st.session_state.points)}")
 
 # Process clicked points
-if map_data.get("last_clicked") and not st.session_state.reset_clicked:
+if map_data is not None and "last_clicked" in map_data and not st.session_state.reset_clicked:
     lat = map_data["last_clicked"]["lat"]
     lng = map_data["last_clicked"]["lng"]
 
     # Limit to two points
     if len(st.session_state.points) < 2:
         st.session_state.points.append((lat, lng))
-        st.experimental_rerun()
+        st.rerun()  # st.rerun() replaces st.experimental_rerun() in newer versions
 
 # Reset flag after rerun
 if st.session_state.reset_clicked:
