@@ -20,7 +20,6 @@ I will need some information to estimate how much your ride will cost.
 d = st.date_input("1. When?", datetime.datetime(2025,3,12))
 
 # Set page title and description
-st.title("Manhattan Location Selector")
 st.write("Select two points on the map by clicking")
 
 # Manhattan coordinates (centered roughly on Midtown)
@@ -40,25 +39,6 @@ def reset_points():
 
 # Create a folium map centered on Manhattan
 m = folium.Map(location=[manhattan_lat, manhattan_lng], zoom_start=13)
-
-# Add some landmarks as reference points
-folium.Marker(
-    [40.7484, -73.9857],
-    popup="Empire State Building",
-    tooltip="Empire State Building"
-).add_to(m)
-
-folium.Marker(
-    [40.7580, -73.9855],
-    popup="Times Square",
-    tooltip="Times Square"
-).add_to(m)
-
-folium.Marker(
-    [40.7527, -73.9772],
-    popup="Grand Central Terminal",
-    tooltip="Grand Central Terminal"
-).add_to(m)
 
 # Display the map and get the clicked point
 map_data = st_folium(m, width=700, height=500, key=f"map_{len(st.session_state.points)}")
